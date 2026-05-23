@@ -1,14 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Inter, Poppins } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/shared/Navbar";
+import { Toaster } from "react-hot-toast";
+import Footer from "@/components/shared/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export const metadata = {
@@ -20,9 +25,14 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar/>
+        <main>{children}</main>
+         <Toaster position="top-center" />
+         <Footer/>
+        </body>
     </html>
   );
 }
