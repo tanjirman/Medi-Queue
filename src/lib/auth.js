@@ -28,5 +28,10 @@ export const auth = betterAuth({
   },
   plugins: [
         jwt(), 
-    ]
+    ],
+    advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
+    },
+  }
 });
