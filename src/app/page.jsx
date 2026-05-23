@@ -1,5 +1,6 @@
 import AvailableTutor from "@/components/homepage/AvailableTutor";
 import Banner from "@/components/homepage/Banner";
+import LearningProcess from "@/components/homepage/LearningProcess";
 import Navbar from "@/components/shared/Navbar";
 import Image from "next/image";
 
@@ -8,6 +9,7 @@ export default function Home() {
     <div >
       <Banner/>
      <AvailableTutor/>
+     <LearningProcess/>
     </div>
   );
 }
