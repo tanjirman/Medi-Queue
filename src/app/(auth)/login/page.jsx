@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { Button } from "@heroui/react";
 import { FaEnvelope, FaLock, FaArrowRight, FaGraduationCap } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { authClient } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 
 // FIX: Import 'token' along with 'signIn'
 //import { signIn, token, authClient } from "@/lib/auth-client";
@@ -36,7 +36,10 @@ export default function LoginPage() {
       }
 
       // 3. Retrieve token securely
-    //   const { data: tokenData, error } = await token.get();
+      //const { data: tokenData, error } = await token.get();
+      
+const { data:tokenData, error } = await authClient.token()
+      console.log(tokenData);
       
     //   if (error) {
     //     console.error("Could not retrieve token:", error);

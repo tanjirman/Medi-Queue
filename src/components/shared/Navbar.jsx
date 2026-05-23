@@ -1,137 +1,140 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@heroui/react";
-import { ThemeSwitcher } from "./ThemeSwitcher";
 import Link from "next/link";
-import NavLink from "./NavLink";
-//import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import Image from "next/image";
-import { Avatar } from "@heroui/react";
+import { useRouter } from "next/navigation";
+
+// import { authClient } from "@/lib/auth-client";
+import NavLink from "./NavLink";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 import { authClient } from "@/lib/auth-client";
-//import { authClient } from "@/app/lib/auth-client";
-// import { authClient } from "@/app/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
 
 export default function Navbar() {
+  const { data: session, isPending } = authClient.useSession();
+  
   const router = useRouter();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Fetch active authentication context from Better-Auth
-   const { data: session, isPending } = authClient.useSession();
+  const user = session?.user || null;
 
-  // Handle system logout action routine
+  // LOGOUT
   const handleLogout = async () => {
-    try {
-      await authClient.signOut({
-        fetchOptions: {
-          onSuccess: () => {
-            toast.success("Logged out successfully! 👋");
-            router.push("/login");
-          },
-        },
-      });
-    } catch (error) {
-      console.error("Logout failed:", error);
-      toast.error("Something went wrong during logout.");
-    }
+    await authClient.signOut();
+
+    window.location.href = "/login";
   };
 
-  return (
-    <nav className="sticky top-0 z-40 w-full bg-background/70 backdrop-blur-lg border-b border-black/5 dark:border-white/5">
-      <header className="flex h-16 items-center justify-between px-6 max-w-7xl mx-auto">
-        {/* Branding & Logo Layout Block */}
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg">
-              <span className="text-white font-black text-xl">M</span>
-            </div>
+  // LOADING STATE
+  if (isPending) {
+    return (
+      <div className="fixed top-0 left-0 w-full z-50 flex justify-center mt-6">
+        <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-8 py-4 rounded-2xl shadow-lg border border-slate-100 dark:border-white/10">
+          <span className="loading loading-spinner loading-md text-cyan-600"></span>
+        </div>
+      </div>
+    );
+  }
 
-            <div>
-              <h1 className="text-2xl font-black tracking-tight bg-linear-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-                MediQueue
-              </h1>
-              <p className="text-[10px] uppercase tracking-[4px] text-default-500">
-                Smart Learning
-              </p>
-            </div>
+  return (
+    <div className="fixed top-0 left-0 w-full z-50 flex justify-center">
+      <nav className="w-full max-w-8xl my-6 mx-4 flex items-center justify-between px-6 py-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md rounded-2xl shadow-lg border border-slate-100 dark:border-white/10 transition-all duration-300">
+        {/* LEFT : LOGO */}
+        <div className="flex-1">
+          <Link
+            href="/"
+            className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white hover:opacity-80 transition-opacity"
+          >
+            Medi<span className="text-cyan-600">Queue</span>
           </Link>
         </div>
 
-        {/* Global Navigation Links Route Map */}
-        <ul className="flex items-center gap-6">
-          <li>
+        {/* CENTER : NAVIGATION */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <div className="flex gap-8 text-sm font-black uppercase tracking-widest text-slate-500 dark:text-slate-300">
             <NavLink href="/">Home</NavLink>
-          </li>
-          <li>
+
             <NavLink href="/tutors">Tutors</NavLink>
-          </li>
-          <li>
-            <NavLink href="/add-tutors">Add Tutors</NavLink>
-          </li>
-          <li>
-            <NavLink href="/my-tutor">My Tutor</NavLink>
-          </li>
-          <li>
-            <NavLink href="/my-booking">My Booking</NavLink>
-          </li>
-        </ul>
 
-        {/* Utility Controls & Interactive Auth State Blocks */}
-        <div className="flex items-center gap-6">
-          <ThemeSwitcher />
+            {user && (
+              <>
+                <NavLink href="/add-tutor">Add Tutor</NavLink>
 
-          <div className="flex items-center gap-4 justify-end">
-            <div className="h-6 w-px bg-gray-200 dark:bg-neutral-800 mx-2" />{" "}
-            {/* Vertical Divider */}
-            {isPending ? (
-              // ⏳ SAFE PLACEHOLDER: Prevents structural layout movement while checking user session
-              <div className="w-24 h-10 bg-slate-100 dark:bg-neutral-800 animate-pulse rounded-2xl" />
-            ) : session?.user ? (
-              // ✅ USER IS LOGGED IN: Render Profile Avatar & Red Logout Button (No list item tags)
-              <div className="flex items-center gap-4">
-                <Avatar>
-                  <Avatar.Image
-                    alt={session.user.name || "User Profile"}
-                    src={session.user.image || undefined}
-                  />
-                  <Avatar.Fallback>
-                    {session.user.name
-                      ? session.user.name.charAt(0).toUpperCase()
-                      : "U"}
-                  </Avatar.Fallback>
-                </Avatar>
+                <NavLink href="/my-tutors">My Tutors</NavLink>
 
-                <Button
-                  onClick={handleLogout}
-                  className="rounded-xl bg-red-500 hover:bg-red-600 text-white font-semibold px-5 transition-all cursor-pointer"
-                >
-                  Logout
-                </Button>
-              </div>
-            ) : (
-              // ❌ NO ACTIVE SESSION: Show Action Gateway Links
-              <div className="flex items-center gap-3">
-                <Link href="/login">
-                  <Button
-                    className="hover:border-cyan-600 hover:bg-cyan-50 rounded-2xl transition-all cursor-pointer"
-                    variant="ghost"
-                  >
-                    Log In
-                  </Button>
-                </Link>
-
-                <Link href="/signup">
-                  <Button className="bg-cyan-600 text-white hover:bg-cyan-700 rounded-2xl px-6 transition-all cursor-pointer">
-                    Sign Up
-                  </Button>
-                </Link>
-              </div>
+                <NavLink href="/my-booked-sessions">My Booked Sessions</NavLink>
+              </>
             )}
           </div>
         </div>
-      </header>
-    </nav>
+
+        {/* RIGHT : AUTH + THEME */}
+        {/* RIGHT : AUTH + THEME */}
+<div className="flex-1 flex justify-end items-center gap-3">
+  
+  {/* THEME SWITCHER */}
+  <ThemeSwitcher />
+
+  {user ? (
+    // LOGGED IN
+    <div className="flex items-center gap-3">
+      
+      {/* PROFILE AVATAR */}
+      <Link href="/profile">
+        {user?.image ? (
+          <Image
+            src={user.image}
+            alt="user"
+            width={42}
+            height={42}
+            unoptimized
+            className="rounded-full border-2 border-cyan-500 cursor-pointer hover:scale-105 transition-all object-cover"
+          />
+        ) : (
+          <div className="w-10 h-10 rounded-full bg-cyan-600 text-white flex items-center justify-center font-black cursor-pointer">
+            {user?.name?.charAt(0).toUpperCase()}
+          </div>
+        )}
+      </Link>
+
+      {/* USER NAME */}
+      <div className="hidden md:flex flex-col">
+        <span className="text-xs text-slate-400 font-semibold">
+          Welcome
+        </span>
+
+        <span className="text-sm font-bold text-slate-900 dark:text-white">
+          {user?.name}
+        </span>
+      </div>
+
+      {/* LOGOUT BUTTON */}
+      <button
+        onClick={handleLogout}
+        className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-full text-xs font-black uppercase tracking-wider transition-all active:scale-95 shadow-md"
+      >
+        Logout
+      </button>
+    </div>
+  ) : (
+    // NOT LOGGED IN
+    <div className="flex items-center gap-2">
+      <Link
+        href="/login"
+        className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all"
+      >
+        Login
+      </Link>
+
+      <Link
+        href="/signup"
+        className="border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all"
+      >
+        Register
+      </Link>
+    </div>
+  )}
+</div>
+      </nav>
+    </div>
   );
 }
