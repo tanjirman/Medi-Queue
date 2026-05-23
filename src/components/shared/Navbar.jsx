@@ -10,7 +10,9 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { Avatar } from "@heroui/react";
-import { authClient } from "@/app/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
+//import { authClient } from "@/app/lib/auth-client";
+// import { authClient } from "@/app/lib/auth-client";
 
 export default function Navbar() {
   const router = useRouter();
