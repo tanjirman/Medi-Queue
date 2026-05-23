@@ -5,18 +5,19 @@ import { Button } from "@heroui/react";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import Link from "next/link";
 import NavLink from "./NavLink";
-// import { authClient } from "@/lib/auth-client";
+//import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { Avatar } from "@heroui/react";
+import { authClient } from "@/app/lib/auth-client";
 
 export default function Navbar() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Fetch active authentication context from Better-Auth
-  //   const { data: session, isPending } = authClient.useSession();
+   const { data: session, isPending } = authClient.useSession();
 
   // Handle system logout action routine
   const handleLogout = async () => {
@@ -82,7 +83,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4 justify-end">
             <div className="h-6 w-px bg-gray-200 dark:bg-neutral-800 mx-2" />{" "}
             {/* Vertical Divider */}
-            {/* {isPending ? (
+            {isPending ? (
               // ⏳ SAFE PLACEHOLDER: Prevents structural layout movement while checking user session
               <div className="w-24 h-10 bg-slate-100 dark:bg-neutral-800 animate-pulse rounded-2xl" />
             ) : session?.user ? (
@@ -125,7 +126,7 @@ export default function Navbar() {
                   </Button>
                 </Link>
               </div>
-            )} */}
+            )}
           </div>
         </div>
       </header>
