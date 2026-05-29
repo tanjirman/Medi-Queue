@@ -17,5 +17,5 @@ return NextResponse.redirect(new URL('/login', request.url))
 // export default function proxy(request) { ... }
  
 export const config = {
-  matcher: ["/tutors/:path*", '/add-tutor', '/my-tutors'],
+  matcher: ["/tutors/:path", '/add-tutor', '/my-tutors'],
 }

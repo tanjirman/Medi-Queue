@@ -77,7 +77,7 @@ export default function AddTutorPage() {
       if (res.ok) {
         toast.success("Tutor added successfully! 🎉");
         reset();
-        router.push("/my-tutor");
+        router.push("/my-tutors");
       } else {
         toast.error(result.message || "Failed to add tutor");
       }

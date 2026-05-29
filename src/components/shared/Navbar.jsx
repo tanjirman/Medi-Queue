@@ -61,7 +61,7 @@ export default function Navbar() {
 
                 <NavLink href="/my-tutors">My Tutors</NavLink>
 
-                <NavLink href="/my-booked-sessions">My Booked Sessions</NavLink>
+                <NavLink href="/my-booking">My Booking</NavLink>
               </>
             )}
           </div>

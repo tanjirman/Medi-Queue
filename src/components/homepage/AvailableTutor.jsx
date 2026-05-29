@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import TutorCard from "./TutorCard";
 import { Spinner } from "@heroui/react";
+import { Button } from "@heroui/react";
+import Link from "next/link";
 
 export default function AvailableTutor() {
   const [tutors, setTutors] = useState([]);
@@ -14,7 +16,7 @@ export default function AvailableTutor() {
         setLoading(true);
 
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/featured-tutors`
+          `${process.env.NEXT_PUBLIC_API_URL}/featured-tutors`,
         );
 
         const data = await res.json();
@@ -53,6 +55,18 @@ export default function AvailableTutor() {
           ))}
         </div>
       )}
+
+      <div className="mt-10 flex mx-auto justify-center">
+        <Link href="/tutors">
+          <Button
+            size="lg"
+            radius="full"
+            className="bg-linear-to-r from-cyan-500 to-blue-600 text-white font-semibold px-8"
+          >
+            Explore All Tutors
+          </Button>
+        </Link>
+      </div>
     </section>
   );
 }

@@ -10,8 +10,11 @@ import { Button, Spinner } from "@heroui/react";
 
 import toast from "react-hot-toast";
 
-import BookingModal from "@/components/BookingModal";
+// import BookingModal from "@/components/BookingModal";
 import { authClient } from "@/lib/auth-client";
+import { BookingModal } from "@/components/BookingModal";
+//import BookingModal from "@/components/BookingModal";
+//import { BookingModal } from "@/components/BookingModal";
 
 
 
@@ -20,9 +23,14 @@ export default function TutorDetailsPage() {
 
   const [tutor, setTutor] = useState(null);
 
+  console.log(tutor);
+
   const [loading, setLoading] = useState(true);
 
   const [open, setOpen] = useState(false);
+
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
 
   useEffect(() => {
     const fetchTutor = async () => {
@@ -44,7 +52,7 @@ export default function TutorDetailsPage() {
        
 
         const token = data.token;
- console.log(token)
+//  console.log(token)
         // ================= FETCH PROTECTED ROUTE =================
 
         const res = await fetch(
@@ -53,7 +61,8 @@ export default function TutorDetailsPage() {
             method: "GET",
 
             headers: {
-              Authorization: `Bearer ${token}`,
+              'content-type' : 'application/json',
+              authorization: `Bearer ${token}`,
             },
           }
         );
@@ -141,6 +150,7 @@ export default function TutorDetailsPage() {
     setOpen(true);
   };
 
+  
   return (
     <div className="max-w-5xl mx-auto px-4 py-10 space-y-8">
 
@@ -215,14 +225,15 @@ export default function TutorDetailsPage() {
 
           {/* ================= BUTTON ================= */}
 
-          <Button
-            onPress={handleBook}
-            isDisabled={!canBook}
-            className="w-full mt-4"
-            color="primary"
-          >
-            Book Session
-          </Button>
+           <BookingModal 
+           tutorId={tutor._id}
+  tutorName={tutor.name}
+  price={tutor.price}
+  availableDays={tutor.availableDays}
+  studentName={session?.user?.name || ""}
+  studentEmail={session?.user?.email || ""}
+
+           />
         </div>
       </div>
 
@@ -264,15 +275,6 @@ export default function TutorDetailsPage() {
           </p>
         </div>
       </div>
-
-      {/* ================= BOOKING MODAL ================= */}
-
-      {open && (
-        <BookingModal
-          tutor={tutor}
-          onClose={() => setOpen(false)}
-        />
-      )}
     </div>
   );
 }

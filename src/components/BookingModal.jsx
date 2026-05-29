@@ -1,204 +1,157 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Button, Input, Label, Modal, TextField } from "@heroui/react";
+import { Button, Modal, Surface } from "@heroui/react";
+import { FaUserGraduate, FaClock, FaDollarSign } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import {
-  FaUser,
-  FaPhone,
-  FaUserTie,
-  FaEnvelope,
-  FaFingerprint,
-} from "react-icons/fa";
+import { Router } from "next/router";
 
-export default function BookingModal({ state, tutor, setTutor, user }) {
-  const [submitting, setSubmitting] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
-  const router = useRouter();
+export function BookingModal({
+  studentName,
+  studentEmail,
+  tutorId,
+  tutorName,
+  price,
+}) {
+  const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = async (data) => {
-    if (!user || !tutor) {
-      toast.error("Missing user or tutor data");
-      return;
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    setSubmitting(true);
+    const formData = new FormData(e.currentTarget);
+    const bookings = Object.fromEntries(formData.entries());
 
-    const bookingPayload = {
-      studentName: user?.name || "Unknown",
-      
-      // ✨ FIX: Saves to 'email' directly so the /my-booking page filter reads it instantly!
-      email: user?.email || "", 
-      studentEmail: user?.email || "", // Kept as fallback for other backend paths
-      
-      phone: data.phone,
-      tutorId: tutor._id,
-      tutorName: tutor.name,
-      tutorImage: tutor.image,
-      price: tutor.price,
-      specialty: tutor.specialty,
-      bookingStatus: "Booked", // Matches requirements specifications tracking string
-      bookingDate: new Date(),
+    const payload = {
+      tutorId,
+      tutorName,
+      studentName,
+      studentEmail,
+      price,
+      contact: bookings.contact,
+      status: "Pending",
+      createdAt: new Date(),
     };
 
     try {
+      setLoading(true);
+
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/bookings`,
         {
           method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(bookingPayload),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
         }
       );
 
-      const result = await res.json();
+      const data = await res.json();
 
-      if (res.ok) {
-        toast.success("Booked successfully! 🎉");
+      if (data.success) {
+        toast.success("🎉 Booking Confirmed!", {
+          style: {
+            borderRadius: "12px",
+            background: "#0f172a",
+            color: "#fff",
+          },
+        });
 
-        // SAFE slot decrease logic update
-        if (typeof setTutor === "function") {
-          setTutor((prev) => ({
-            ...prev,
-            totalSlot: Math.max(0, Number(prev.totalSlot || 0) - 1),
-          }));
-        }
+        e.target.reset();
+          Router.push("/my-booking");
 
-        reset();
-        state.close();
-        
-        // Refresh routing context layers and navigate to listings board
-        router.refresh();
-        router.push("/my-booking");
       } else {
-        toast.error(result.message || "Booking failed");
+        toast.error("❌ Booking failed");
       }
     } catch (err) {
-      console.error(err);
-      toast.error("Server error");
+      toast.error("Something went wrong!");
     } finally {
-      setSubmitting(false);
+      setLoading(false);
     }
   };
 
   return (
-    <Modal state={state}>
-      <Modal.Backdrop className="backdrop-blur-md">
-        <Modal.Container placement="center" className="max-w-xl mx-4">
-          <Modal.Dialog className="rounded-[32px] p-6 bg-white dark:bg-slate-900 border border-black/5 dark:border-white/10 shadow-2xl">
-            
+    <Modal>
+      <Button className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl">
+        Book Session
+      </Button>
+
+      <Modal.Backdrop>
+        <Modal.Container placement="center">
+          <Modal.Dialog className="sm:max-w-xl rounded-2xl">
             <Modal.Header>
-              <Modal.Heading className="text-2xl font-black text-black dark:text-white">
-                Confirm Your Session
-              </Modal.Heading>
-              <p className="mt-1 text-sm text-default-400">
-                Please confirm your booking details before proceeding.
-              </p>
+              <Modal.Heading>Book Your Session</Modal.Heading>
             </Modal.Header>
 
-            <Modal.Body className="py-4">
-              <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
+            <Modal.Body className="p-6">
+              <Surface className="p-5 rounded-xl space-y-4 bg-white dark:bg-gray-900">
 
-                {/* Student Name */}
-                <TextField>
-                  <Label className="text-xs font-bold uppercase text-default-500">
-                    Student Name
-                  </Label>
-                  <div className="relative mt-1">
-                    <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500" />
-                    <Input
-                      value={user?.name || ""}
-                      readOnly
-                      className="pl-10 bg-slate-100 dark:bg-white/5"
-                    />
-                  </div>
-                </TextField>
-
-                {/* Email */}
-                <TextField>
-                  <Label className="text-xs font-bold uppercase text-default-500">
-                    Email Address
-                  </Label>
-                  <div className="relative mt-1">
-                    <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500" />
-                    <Input
-                      value={user?.email || ""}
-                      readOnly
-                      className="pl-10 bg-slate-100 dark:bg-white/5"
-                    />
-                  </div>
-                </TextField>
-
-                {/* Tutor */}
-                <TextField>
-                  <Label className="text-xs font-bold uppercase text-default-500">
-                    Tutor Name
-                  </Label>
-                  <div className="relative mt-1">
-                    <FaUserTie className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500" />
-                    <Input
-                      value={tutor?.name || ""}
-                      readOnly
-                      className="pl-10 bg-slate-100 dark:bg-white/5"
-                    />
-                  </div>
-                </TextField>
-
-                {/* Tutor ID */}
-                <TextField>
-                  <Label className="text-xs font-bold uppercase text-default-500">
-                    Tutor ID
-                  </Label>
-                  <div className="relative mt-1">
-                    <FaFingerprint className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500" />
-                    <Input
-                      value={tutor?._id || ""}
-                      readOnly
-                      className="pl-10 font-mono text-xs bg-slate-100 dark:bg-white/5"
-                    />
-                  </div>
-                </TextField>
-
-                {/* Phone */}
-                <TextField>
-                  <Label className="text-xs font-bold uppercase text-default-500">
-                    Phone Number
-                  </Label>
-                  <div className="relative mt-1">
-                    <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500" />
+                <form
+                  id="booking-form"
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                >
+                  {/* Tutor */}
+                  <div>
+                    <label className="text-sm font-medium">Tutor</label>
                     <input
-                      {...register("phone")}
+                      value={tutorName}
+                      disabled
+                      className="w-full p-3 rounded-xl border bg-gray-100"
+                    />
+                  </div>
+
+                  {/* Student */}
+                  <div>
+                    <label className="text-sm font-medium">Student</label>
+                    <input
+                      value={studentName}
+                      disabled
+                      className="w-full p-3 rounded-xl border bg-gray-100"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label className="text-sm font-medium">Email</label>
+                    <input
+                      value={studentEmail}
+                      disabled
+                      className="w-full p-3 rounded-xl border bg-gray-100"
+                    />
+                  </div>
+
+                  {/* Price */}
+                  <div>
+                    <label className="text-sm font-medium">Price</label>
+                    <input
+                      value={price}
+                      disabled
+                      className="w-full p-3 rounded-xl border bg-gray-100"
+                    />
+                  </div>
+
+                  {/* Contact */}
+                  <div>
+                    <label className="text-sm font-medium">Contact</label>
+                    <input
+                      name="contact"
                       required
                       placeholder="Enter phone number"
-                      className="w-full h-10 pl-10 rounded-xl border border-black/10 dark:border-white/10 bg-transparent outline-none focus:border-cyan-500 text-black dark:text-white"
+                      className="w-full p-3 rounded-xl border focus:ring-2 focus:ring-cyan-500"
                     />
                   </div>
-                </TextField>
-
-                {/* Buttons */}
-                <div className="flex gap-4 pt-4 border-t border-black/5 dark:border-white/10">
-                  <Button
-                    type="button"
-                    onClick={() => state.close()}
-                    className="w-1/2 h-12 rounded-xl border border-default-200"
-                  >
-                    Cancel
-                  </Button>
 
                   <Button
                     type="submit"
-                    disabled={submitting}
-                    className="w-1/2 h-12 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold"
+                    disabled={loading}
+                    className="w-full bg-cyan-600 text-white rounded-xl"
                   >
-                    {submitting ? "Processing..." : "Confirm Booking"}
+                    {loading ? "Booking..." : "Confirm Booking"}
                   </Button>
-                </div>
-
-              </form>
+                </form>
+              </Surface>
             </Modal.Body>
-
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>
