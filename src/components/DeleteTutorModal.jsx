@@ -23,46 +23,47 @@ export function DeleteTutorModal({
   // =========================
   // DELETE FUNCTION
   // =========================
-
-  const handleDelete = async () => {
+const handleDelete = async () => {
   setDeleting(true);
 
   try {
+    const { data, error } = await authClient.token();
+
+    if (error) {
+      toast.error("Authentication failed");
+      return;
+    }
+
+    //const token = data.token;
+
     const res = await fetch(
-  `${process.env.NEXT_PUBLIC_API_URL}/tutors/${_id}`,
-  {
-    method: "DELETE",
-    credentials: "include",
-  }
-);
+      `${process.env.NEXT_PUBLIC_API_URL}/tutors/${_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          //authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    const data = await res.json();
+    const result = await res.json();
 
-    if (res.ok) {
-      toast.success(
-        "Tutor deleted successfully"
-      );
+    if (result.success) {
+      toast.success("🗑️ Tutor deleted successfully!");
 
       setTutors((prev) =>
-        prev.filter(
-          (item) => item._id !== _id
-        )
+        prev.filter((item) => item._id !== _id)
       );
 
       onClose();
       router.refresh();
     } else {
-      toast.error(
-        data.message ||
-          "Delete failed"
-      );
+      toast.error(result.message);
     }
   } catch (err) {
-    console.log(err);
-
-    toast.error(
-      "Something went wrong"
-    );
+    console.error(err);
+    toast.error("Something went wrong");
   } finally {
     setDeleting(false);
   }

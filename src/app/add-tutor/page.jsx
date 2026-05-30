@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Spinner } from "@heroui/react";
 import {
@@ -18,6 +18,9 @@ import toast from "react-hot-toast";
 import { authClient, useSession } from "@/lib/auth-client";
 
 export default function AddTutorPage() {
+  useEffect(() => {
+    document.title = "Add-Tutors | Tutor Booking";
+  }, []);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data: session, isPending } = useSession();

@@ -11,6 +11,11 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 
 export default function MyTutorsPage() {
+
+  useEffect(() => {
+    document.title = "My-Tutors | Tutor Booking";
+  }, []);
+
   const [tutors, setTutors] = useState([]);
   const [loading, setLoading] = useState(true);
   

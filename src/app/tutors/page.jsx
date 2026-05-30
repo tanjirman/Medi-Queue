@@ -6,7 +6,13 @@ import Image from "next/image";
 import { Button, Spinner } from "@heroui/react";
 import { FaMapMarkerAlt, FaClock, FaTimes } from "react-icons/fa";
 
+
+
 export default function TutorsPage() {
+  useEffect(() => {
+    document.title = "Tutors | Tutor Booking";
+  }, []);
+
   const [tutors, setTutors] = useState([]);
   const [loading, setLoading] = useState(true);
 

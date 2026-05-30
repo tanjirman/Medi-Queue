@@ -19,11 +19,16 @@ import { BookingModal } from "@/components/BookingModal";
 
 
 export default function TutorDetailsPage() {
+
+  useEffect(() => {
+    document.title = "Tutor-Details | Tutor Booking";
+  }, []);
+
   const { id } = useParams();
 
   const [tutor, setTutor] = useState(null);
 
-  console.log(tutor);
+  //console.log(tutor);
 
   const [loading, setLoading] = useState(true);
 
@@ -232,6 +237,8 @@ export default function TutorDetailsPage() {
   availableDays={tutor.availableDays}
   studentName={session?.user?.name || ""}
   studentEmail={session?.user?.email || ""}
+
+  isDisabled={!canBook}
 
            />
         </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Modal, Surface } from "@heroui/react";
 import { FaUserGraduate, FaClock, FaDollarSign } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 export function BookingModal({
   studentName,
@@ -12,14 +12,19 @@ export function BookingModal({
   tutorId,
   tutorName,
   price,
+  isDisabled
 }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const bookings = Object.fromEntries(formData.entries());
+
+
+
 
     const payload = {
       tutorId,
@@ -58,7 +63,8 @@ export function BookingModal({
         });
 
         e.target.reset();
-          Router.push("/my-booking");
+        router.refresh();
+          //Router.push("/my-booking");
 
       } else {
         toast.error("❌ Booking failed");
@@ -72,7 +78,7 @@ export function BookingModal({
 
   return (
     <Modal>
-      <Button className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl">
+      <Button  isDisabled={isDisabled} className="w-full mt-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-xl">
         Book Session
       </Button>
 
@@ -143,6 +149,7 @@ export function BookingModal({
                   </div>
 
                   <Button
+                  
                     type="submit"
                     disabled={loading}
                     className="w-full bg-cyan-600 text-white rounded-xl"
