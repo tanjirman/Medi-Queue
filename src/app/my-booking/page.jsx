@@ -28,23 +28,43 @@ export default function MyBookingPage() {
     if (!user?.email) return;
 
     const fetchBookings = async () => {
-      try {
-        setLoading(true);
+  try {
+    setLoading(true);
 
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/bookings?email=${user.email}`
-        );
+    const { data: tokenData, error } =
+      await authClient.token();
 
-        const data = await res.json();
+      //console.log(tokenData);
 
-        setBookings(data);
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to load bookings");
-      } finally {
-        setLoading(false);
+    if (error || !tokenData?.token) {
+      toast.error("Token not found");
+      return;
+    }
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/bookings?email=${user.email}`,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenData.token}`,
+        },
       }
-    };
+    );
+
+    if (!res.ok) {
+      throw new Error("Unauthorized");
+    }
+
+    const data = await res.json();
+
+    setBookings(data);
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to load bookings");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
     fetchBookings();
   }, [user]);

@@ -1,10 +1,9 @@
-import {  Inter, Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import { Toaster } from "react-hot-toast";
 import Footer from "@/components/shared/Footer";
 import { Providers } from "./providers";
-
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,13 +32,13 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-          <Providers>
-        <Navbar/>
-        <main>{children}</main>
-         <Toaster position="top-center" />
-         <Footer/>
-         </Providers>
-        </body>
+        <Providers>
+          <Navbar />
+          <main className="pt-26">{children}</main>
+          <Toaster position="top-center" />
+          <Footer />
+        </Providers>
+      </body>
     </html>
   );
 }

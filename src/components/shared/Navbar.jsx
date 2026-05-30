@@ -40,7 +40,7 @@ export default function Navbar() {
             href="/"
             className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
           >
-            Tutor<span className="text-cyan-600">Link</span>
+            Medi<span className="text-cyan-600">Queue</span>
           </Link>
         </div>
 
@@ -54,13 +54,15 @@ export default function Navbar() {
 
             {user && (
               <>
-                <NavLink href="/add-tutor">Add-Tutor</NavLink>
+              <div className="flex flex-row items-center whitespace-nowrap gap-4">
+                <NavLink href="/add-tutor" >Add-Tutor</NavLink>
 
                 <NavLink href="/my-tutors">My-Tutors</NavLink>
 
                 <NavLink href="/my-booking">
                   My-Booking
                 </NavLink>
+                </div>
               </>
             )}
           </div>
@@ -134,7 +136,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/register"
+                href="/signup"
                 className="border px-6 py-2 rounded-full text-xs font-bold"
               >
                 Register

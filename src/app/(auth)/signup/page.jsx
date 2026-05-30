@@ -105,6 +105,13 @@ export default function RegisterPage() {
     }
   };
 
+  // google login
+  const handleGoogleLogin = async ()=>{
+    await authClient.signIn.social({
+    provider: "google",
+  });
+  }
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-50 via-white to-blue-50 dark:from-black dark:via-slate-950 dark:to-black px-4 py-20 overflow-hidden">
 
@@ -300,17 +307,7 @@ export default function RegisterPage() {
           {/* GOOGLE */}
           <button
             type="button"
-            onClick={async () => {
-
-              await authClient.signIn.social({
-
-                provider: "google",
-
-                callbackURL: "/",
-
-                errorCallbackURL: "/register?error=google-failed",
-              });
-            }}
+            onClick={handleGoogleLogin}
             className="w-full h-14 rounded-2xl border border-black/10 dark:border-white/10 flex items-center justify-center gap-4 hover:bg-black/5 dark:hover:bg-white/5 transition font-semibold"
           >
 
