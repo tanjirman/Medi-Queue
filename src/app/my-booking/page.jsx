@@ -116,9 +116,9 @@ export default function MyBookingPage() {
                       Student
                     </th>
 
-                    <th className="text-left px-6 py-5 text-sm font-black uppercase tracking-wider">
+                    {/* <th className="text-left px-6 py-5 text-sm font-black uppercase tracking-wider">
                       Email
-                    </th>
+                    </th> */}
 
                     <th className="text-left px-6 py-5 text-sm font-black uppercase tracking-wider">
                       Status
@@ -182,10 +182,10 @@ export default function MyBookingPage() {
                         </div>
                       </td>
 
-                      {/* Email */}
+                      {/* Email
                       <td className="px-6 py-5 text-sm font-medium text-default-600">
                         {booking.email}
-                      </td>
+                      </td> */}
 
                       {/* Status */}
                       <td className="px-6 py-5">
