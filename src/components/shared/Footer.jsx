@@ -1,7 +1,14 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiGithub,
+  FiLinkedin,
+  FiInstagram,
+} from "react-icons/fi";
 import { RiTwitterXFill } from "react-icons/ri"; // Modern X logo instead of old Twitter bird
 import { FaGraduationCap } from "react-icons/fa";
 
@@ -13,7 +20,10 @@ export default function Footer() {
     { label: "Mathematics & Calculus", href: "/tutors?subject=mathematics" },
     { label: "Physics & Core Sciences", href: "/tutors?subject=physics" },
     { label: "Chemistry & Molecular Tech", href: "/tutors?subject=chemistry" },
-    { label: "Computer Science & Coding", href: "/tutors?subject=computer-science" },
+    {
+      label: "Computer Science & Coding",
+      href: "/tutors?subject=computer-science",
+    },
     { label: "Language & Communications", href: "/tutors?subject=languages" },
   ];
 
@@ -30,7 +40,6 @@ export default function Footer() {
     <footer className="w-full bg-default-50 border-t border-default-100/60 dark:bg-zinc-950/40 transition-colors duration-200">
       {/* Main Footer Directory Content */}
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        
         {/* Column 1: Brand Pitch & Presentation */}
         <div className="flex flex-col gap-4">
           <Link href="/" className="flex items-center gap-3">
@@ -39,20 +48,22 @@ export default function Footer() {
             </div>
             <div>
               <div className="flex-1">
-          <Link
-            href="/"
-            className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
-          >
-            Medi<span className="text-cyan-600">Queue</span>
-          </Link>
-        </div>
+                <Link
+                  href="/"
+                  className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
+                >
+                  Medi<span className="text-cyan-600">Queue</span>
+                </Link>
+              </div>
               <p className="text-[9px] uppercase tracking-[3px] text-default-400">
                 Smart Learning
               </p>
             </div>
           </Link>
           <p className="text-sm text-default-500 leading-relaxed max-w-sm">
-            Eliminating scheduling manual headaches, managing queue conflicts, and securing instantly verified session paths to optimize modern student schedules.
+            Eliminating scheduling manual headaches, managing queue conflicts,
+            and securing instantly verified session paths to optimize modern
+            student schedules.
           </p>
         </div>
 
@@ -64,8 +75,8 @@ export default function Footer() {
           <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
             {servicesLinks.map((link, idx) => (
               <li key={idx}>
-                <Link 
-                  href={link.href} 
+                <Link
+                  href={link.href}
                   className="text-sm text-default-500 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
                 >
                   {link.label}
@@ -83,8 +94,8 @@ export default function Footer() {
           <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
             {platformLinks.map((link, idx) => (
               <li key={idx}>
-                <Link 
-                  href={link.href} 
+                <Link
+                  href={link.href}
                   className="text-sm text-default-500 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
                 >
                   {link.label}
@@ -106,19 +117,24 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-3">
               <FiPhone className="text-cyan-500 text-lg shrink-0" />
-              <a href="tel:+880123456789" className="hover:text-cyan-500 transition-colors">
+              <a
+                href="tel:+880123456789"
+                className="hover:text-cyan-500 transition-colors"
+              >
                 +880 1234-567890
               </a>
             </li>
             <li className="flex items-center gap-3">
               <FiMail className="text-cyan-500 text-lg shrink-0" />
-              <a href="mailto:support@mediqueue.com" className="hover:text-cyan-500 transition-colors">
+              <a
+                href="mailto:support@mediqueue.com"
+                className="hover:text-cyan-500 transition-colors"
+              >
                 support@mediqueue.com
               </a>
             </li>
           </ul>
         </div>
-
       </div>
 
       {/* Decorative Isolation Rule */}
@@ -128,52 +144,52 @@ export default function Footer() {
 
       {/* Secondary Bottom Area: Copyright & Social Matrices */}
       <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        
         {/* Copyright Attribution */}
         <p className="text-xs text-default-400 text-center sm:text-left">
-          &copy; {currentYear} <span className="font-semibold text-default-500">MediQueue</span>. All rights reserved. Built for Smart Scheduling.
+          &copy; {currentYear}{" "}
+          <span className="font-semibold text-default-500">MediQueue</span>. All
+          rights reserved. Built for Smart Scheduling.
         </p>
 
         {/* Social Network Icon Matrix */}
         <div className="flex items-center gap-4">
-          <a 
-            href="https://x.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://x.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
             aria-label="Follow MediQueue on X"
           >
             <RiTwitterXFill className="text-base" />
           </a>
-          <a 
-            href="https://linkedin.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
             aria-label="Connect on LinkedIn"
           >
             <FiLinkedin className="text-base" />
           </a>
-          <a 
-            href="https://github.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
             aria-label="Explore GitHub Source"
           >
             <FiGithub className="text-base" />
           </a>
-          <a 
-            href="https://instagram.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
             aria-label="Follow on Instagram"
           >
             <FiInstagram className="text-base" />
           </a>
         </div>
-
       </div>
     </footer>
   );
