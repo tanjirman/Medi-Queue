@@ -189,27 +189,25 @@ export default function TutorDetailsPage() {
             {tutor.subject}
           </p>
 
-          <div className="flex gap-3 flex-wrap text-sm">
+         <div className="flex gap-3 flex-wrap text-sm">
+  <span className="px-3 py-1 rounded-full bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+    💰 ${tutor.price}/hr
+  </span>
 
-            <span className="px-3 py-1 bg-gray-100 rounded-full">
-              💰 ${tutor.price}/hr
-            </span>
+  <span className="px-3 py-1 rounded-full bg-slate-200 text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+    📅 {tutor.availableDays}
+  </span>
 
-            <span className="px-3 py-1 bg-gray-100 rounded-full">
-              📅 {tutor.availableDays}
-            </span>
-
-            <span
-              className={`px-3 py-1 rounded-full ${
-                hasSlots
-                  ? "bg-green-100"
-                  : "bg-red-100"
-              }`}
-            >
-              🎯 {totalSlot} slots left
-            </span>
-          </div>
-
+  <span
+    className={`px-3 py-1 rounded-full ${
+      hasSlots
+        ? "bg-emerald-200 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300"
+        : "bg-rose-200 text-rose-900 dark:bg-rose-900/40 dark:text-rose-300"
+    }`}
+  >
+    🎯 {totalSlot} slots left
+  </span>
+</div>
           <p className="text-sm text-gray-600">
             {tutor.experience}
           </p>

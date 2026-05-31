@@ -38,9 +38,14 @@ export default function Footer() {
               <FaGraduationCap className="text-white text-xl" />
             </div>
             <div>
-              <h2 className="text-xl font-black tracking-tight bg-linear-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-                MediQueue
-              </h2>
+              <div className="flex-1">
+          <Link
+            href="/"
+            className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
+          >
+            Medi<span className="text-cyan-600">Queue</span>
+          </Link>
+        </div>
               <p className="text-[9px] uppercase tracking-[3px] text-default-400">
                 Smart Learning
               </p>

@@ -156,26 +156,42 @@ export default function AddTutorPage() {
 
             {/* SPECIALTY */}
             <div>
-              <label className="font-semibold text-black dark:text-white">
-                Subject
-              </label>
-              <div className="relative mt-2">
-                <FaBookOpen className="absolute left-5 top-1/2 -translate-y-1/2 text-cyan-500 z-10" />
-                <select
-                  required
-                  {...register("specialty")}
-                  className="w-full h-14 pl-14 pr-5 rounded-2xl border border-black/10 dark:border-white/10 bg-transparent outline-none appearance-none"
-                >
-                  <option value="">Select Subject</option>
-                  <option value="Mathematics">Mathematics</option>
-                  <option value="Physics">Physics</option>
-                  <option value="Chemistry">Chemistry</option>
-                  <option value="Biology">Biology</option>
-                  <option value="Programming">Programming</option>
-                  <option value="English">English</option>
-                </select>
-              </div>
-            </div>
+  <label className="font-semibold text-black dark:text-white">
+    Subject
+  </label>
+
+  <div className="relative mt-2">
+    <FaBookOpen className="absolute left-5 top-1/2 -translate-y-1/2 text-cyan-500 z-10" />
+
+    <select
+  required
+  {...register("specialty")}
+  className="w-full h-14 pl-14 pr-5 rounded-2xl border border-black/10 dark:border-white/10 bg-transparent text-black dark:text-white outline-none"
+>
+  <option value="" style={{ backgroundColor: "white", color: "black" }}>
+    Select Subject
+  </option>
+  <option value="Mathematics" style={{ backgroundColor: "white", color: "black" }}>
+    Mathematics
+  </option>
+  <option value="Physics" style={{ backgroundColor: "white", color: "black" }}>
+    Physics
+  </option>
+  <option value="Chemistry" style={{ backgroundColor: "white", color: "black" }}>
+    Chemistry
+  </option>
+  <option value="Biology" style={{ backgroundColor: "white", color: "black" }}>
+    Biology
+  </option>
+  <option value="Programming" style={{ backgroundColor: "white", color: "black" }}>
+    Programming
+  </option>
+  <option value="English" style={{ backgroundColor: "white", color: "black" }}>
+    English
+  </option>
+</select>
+  </div>
+</div>
 
             {/* PRICE */}
             <div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button, Modal, Surface } from "@heroui/react";
-import { FaUserGraduate, FaClock, FaDollarSign } from "react-icons/fa";
+import { FaUserGraduate, FaClock, FaDollarSign, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -85,9 +85,13 @@ export function BookingModal({
       <Modal.Backdrop>
         <Modal.Container placement="center">
           <Modal.Dialog className="sm:max-w-xl rounded-2xl">
-            <Modal.Header>
-              <Modal.Heading>Book Your Session</Modal.Heading>
-            </Modal.Header>
+            <Modal.Header className="flex items-center justify-between">
+  <Modal.Heading>Book Your Session</Modal.Heading>
+
+  <Modal.CloseTrigger className="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition">
+    <FaTimes className="w-4 h-4" />
+  </Modal.CloseTrigger>
+</Modal.Header>
 
             <Modal.Body className="p-6">
               <Surface className="p-5 rounded-xl space-y-4 bg-white dark:bg-gray-900">
@@ -103,7 +107,7 @@ export function BookingModal({
                     <input
                       value={tutorName}
                       disabled
-                      className="w-full p-3 rounded-xl border bg-gray-100"
+                      className="w-full p-3 rounded-xl border border-black/10 dark:border-white/10 bg-gray-100 dark:bg-slate-800 text-black dark:text-white disabled:text-black dark:disabled:text-white"
                     />
                   </div>
 
@@ -113,7 +117,7 @@ export function BookingModal({
                     <input
                       value={studentName}
                       disabled
-                      className="w-full p-3 rounded-xl border bg-gray-100"
+                      className="w-full p-3 rounded-xl border border-black/10 dark:border-white/10 bg-gray-100 dark:bg-slate-800 text-black dark:text-white disabled:text-black dark:disabled:text-white"
                     />
                   </div>
 
@@ -123,7 +127,7 @@ export function BookingModal({
                     <input
                       value={studentEmail}
                       disabled
-                      className="w-full p-3 rounded-xl border bg-gray-100"
+                      className="w-full p-3 rounded-xl border border-black/10 dark:border-white/10 bg-gray-100 dark:bg-slate-800 text-black dark:text-white disabled:text-black dark:disabled:text-white"
                     />
                   </div>
 
@@ -133,7 +137,7 @@ export function BookingModal({
                     <input
                       value={price}
                       disabled
-                      className="w-full p-3 rounded-xl border bg-gray-100"
+                      className="w-full p-3 rounded-xl border border-black/10 dark:border-white/10 bg-gray-100 dark:bg-slate-800 text-black dark:text-white disabled:text-black dark:disabled:text-white"
                     />
                   </div>
 
@@ -148,6 +152,7 @@ export function BookingModal({
                     />
                   </div>
 
+                
                   <Button
                   
                     type="submit"
