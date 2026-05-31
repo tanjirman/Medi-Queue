@@ -20,8 +20,8 @@ export default function Footer() {
   // Quick Platform Navigation Data
   const platformLinks = [
     { label: "Find Available Tutors", href: "/tutors" },
-    { label: "Become a Tutor", href: "/add-tutors" },
-    { label: "Student Dashboard", href: "/my-booking" },
+    { label: "Become a Tutor", href: "/add-tutor" },
+    { label: "Student Dashboard", href: "/profile" },
     { label: "Privacy & Policy", href: "/" },
     { label: "Terms of Service", href: "/" },
   ];
