@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+MediQueue is a modern Tutor Booking System that allows students to discover tutors, view tutor details, and book learning sessions based on availability. The platform simplifies tutor scheduling by managing available slots, preventing booking conflicts, and providing an organized booking experience.
 
-## Getting Started
+Students can browse tutors, book sessions, manage their bookings, and tutors can create, update, and manage their teaching profiles through an intuitive and responsive interface.
 
-First, run the development server:
+🛠️ Technologies Used
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![HeroUI](https://img.shields.io/badge/HeroUI-000000?style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![React Hook Form](https://img.shields.io/badge/React_Hook_Form-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white)
+![Better Auth](https://img.shields.io/badge/Better_Auth-4B32C3?style=for-the-badge)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✨ Key Features
+🔐 Secure Authentication with Email/Password and Google Login
+🎓 Browse and Search Tutors by Name
+📅 Book Tutor Sessions with Automatic Slot Management
+📝 Create, Update, and Delete Tutor Profiles
+🌙 Fully Functional Dark and Light Theme
+🔍 Tutor Search and Date Filtering System
+📱 Fully Responsive Design for Mobile, Tablet, and Desktop
+🔒 JWT Protected Private Routes
+⚡ Dynamic Page Titles and Loading Spinners
+🔔 Toast Notifications for All CRUD Operations
+🖼️ Main Functionalities
 
-## Learn More
+Home Page
+-Hero Banner Slider
+-Featured Tutors Section
+-Additional Learning Sections
+-Call-To-Action Buttons
 
-To learn more about Next.js, take a look at the following resources:
+Authentication
+-User Registration
+-User Login
+-Google Authentication
+-Protected Routes
+-JWT Token-Based Security
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tutors Page
+-View All Tutors
+-Search Tutors by Name
+-Filter Tutors by Date Range
+-Responsive Card Layout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tutor Details
+-Detailed Tutor Information
+-Session Booking Modal
+-Auto Slot Validation
+-Booking Restrictions Based on Availability
 
-## Deploy on Vercel
+Add Tutor
+-Create New Tutor Profiles
+-Subject Selection
+-Teaching Mode Selection
+-Session Date and Availability Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+My Tutors
+-View Created Tutors
+-Update Tutor Information
+-Delete Tutor Profiles
+-Real-Time UI Updates
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+My Booked Sessions
+-View Personal Bookings
+-Booking Status Tracking
+-Cancel Booking Feature
+-Automatic Slot Restoration
+
+🔒 Authentication & Security
+-JWT Token Generation
+-Protected API Endpoints
+-Route Protection
+-Secure User Validation
+-Google OAuth Authentication
