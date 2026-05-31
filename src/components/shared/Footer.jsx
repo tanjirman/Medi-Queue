@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import Link from "next/link";
 import {
   FiMail,
@@ -9,13 +9,12 @@ import {
   FiLinkedin,
   FiInstagram,
 } from "react-icons/fi";
-import { RiTwitterXFill } from "react-icons/ri"; // Modern X logo instead of old Twitter bird
+import { RiTwitterXFill } from "react-icons/ri";
 import { FaGraduationCap } from "react-icons/fa";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Learning Services Directory Data
   const servicesLinks = [
     { label: "Mathematics & Calculus", href: "/tutors?subject=mathematics" },
     { label: "Physics & Core Sciences", href: "/tutors?subject=physics" },
@@ -27,7 +26,6 @@ export default function Footer() {
     { label: "Language & Communications", href: "/tutors?subject=languages" },
   ];
 
-  // Quick Platform Navigation Data
   const platformLinks = [
     { label: "Find Available Tutors", href: "/tutors" },
     { label: "Become a Tutor", href: "/add-tutor" },
@@ -37,47 +35,47 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-default-50 border-t border-default-100/60 dark:bg-zinc-950/40 transition-colors duration-200">
-      {/* Main Footer Directory Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Column 1: Brand Pitch & Presentation */}
+    <footer className="w-full bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+        
+        {/* Brand */}
         <div className="flex flex-col gap-4">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-md">
               <FaGraduationCap className="text-white text-xl" />
             </div>
+
             <div>
-              <div className="flex-1">
-                <Link
-                  href="/"
-                  className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white"
-                >
-                  Medi<span className="text-cyan-600">Queue</span>
-                </Link>
-              </div>
-              <p className="text-[9px] uppercase tracking-[3px] text-default-400">
+              <h2 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
+                Medi<span className="text-cyan-600">Queue</span>
+              </h2>
+
+              <p className="text-[9px] uppercase tracking-[3px] text-slate-400">
                 Smart Learning
               </p>
             </div>
           </Link>
-          <p className="text-sm text-default-500 leading-relaxed max-w-sm">
+
+          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
             Eliminating scheduling manual headaches, managing queue conflicts,
             and securing instantly verified session paths to optimize modern
             student schedules.
           </p>
         </div>
 
-        {/* Column 2: Tutor Services / Learning Trackers */}
+        {/* Learning Services */}
         <div className="flex flex-col gap-3">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-default-800 dark:text-default-200">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
             Learning Services
           </h3>
-          <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+
+          <ul className="flex flex-col gap-2.5">
             {servicesLinks.map((link, idx) => (
               <li key={idx}>
                 <Link
                   href={link.href}
-                  className="text-sm text-default-500 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                  className="inline-block text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-500 hover:translate-x-1 transition-all"
                 >
                   {link.label}
                 </Link>
@@ -86,17 +84,18 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Column 3: Quick Platform Links */}
+        {/* Platform Links */}
         <div className="flex flex-col gap-3">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-default-800 dark:text-default-200">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
             Explore Platform
           </h3>
-          <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+
+          <ul className="flex flex-col gap-2.5">
             {platformLinks.map((link, idx) => (
               <li key={idx}>
                 <Link
                   href={link.href}
-                  className="text-sm text-default-500 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                  className="inline-block text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-500 hover:translate-x-1 transition-all"
                 >
                   {link.label}
                 </Link>
@@ -105,16 +104,18 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Column 4: Contact & Physical Location Profiles */}
+        {/* Contact */}
         <div className="flex flex-col gap-4">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-default-800 dark:text-default-200">
+          <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">
             Contact & Support
           </h3>
-          <ul className="flex flex-col gap-3 list-none m-0 p-0 text-sm text-default-500">
+
+          <ul className="flex flex-col gap-3 text-sm text-slate-600 dark:text-slate-400">
             <li className="flex items-center gap-3">
               <FiMapPin className="text-cyan-500 text-lg shrink-0" />
               <span>Savar, Dhaka, Bangladesh</span>
             </li>
+
             <li className="flex items-center gap-3">
               <FiPhone className="text-cyan-500 text-lg shrink-0" />
               <a
@@ -124,6 +125,7 @@ export default function Footer() {
                 +880 1234-567890
               </a>
             </li>
+
             <li className="flex items-center gap-3">
               <FiMail className="text-cyan-500 text-lg shrink-0" />
               <a
@@ -137,58 +139,53 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Decorative Isolation Rule */}
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="w-full h-px bg-default-200/40 dark:bg-default-100/10" />
+      {/* Divider */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full h-px bg-slate-200 dark:bg-slate-800" />
       </div>
 
-      {/* Secondary Bottom Area: Copyright & Social Matrices */}
-      <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Copyright Attribution */}
-        <p className="text-xs text-default-400 text-center sm:text-left">
+      {/* Bottom */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <p className="text-xs text-slate-500">
           &copy; {currentYear}{" "}
-          <span className="font-semibold text-default-500">MediQueue</span>. All
-          rights reserved. Built for Smart Scheduling.
+          <span className="font-semibold">MediQueue</span>. All rights
+          reserved. Built for Smart Scheduling.
         </p>
 
-        {/* Social Network Icon Matrix */}
         <div className="flex items-center gap-4">
-          <a
-            href="https://x.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
-            aria-label="Follow MediQueue on X"
-          >
-            <RiTwitterXFill className="text-base" />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
-            aria-label="Connect on LinkedIn"
-          >
-            <FiLinkedin className="text-base" />
-          </a>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
-            aria-label="Explore GitHub Source"
-          >
-            <FiGithub className="text-base" />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-8 h-8 rounded-xl bg-default-100 dark:bg-default-50/5 flex items-center justify-center text-default-500 hover:bg-cyan-500/10 hover:text-cyan-500 transition-all active:scale-90"
-            aria-label="Follow on Instagram"
-          >
-            <FiInstagram className="text-base" />
-          </a>
+          {[
+            {
+              href: "https://x.com",
+              icon: <RiTwitterXFill className="text-base" />,
+              label: "X",
+            },
+            {
+              href: "https://linkedin.com",
+              icon: <FiLinkedin className="text-base" />,
+              label: "LinkedIn",
+            },
+            {
+              href: "https://github.com",
+              icon: <FiGithub className="text-base" />,
+              label: "GitHub",
+            },
+            {
+              href: "https://instagram.com",
+              icon: <FiInstagram className="text-base" />,
+              label: "Instagram",
+            },
+          ].map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-cyan-500 hover:bg-cyan-500/10 hover:scale-110 transition-all"
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
       </div>
     </footer>
